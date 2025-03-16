@@ -3,7 +3,36 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
 function AddTask() {
-   
+    const [task, setTask] = useState(JSON.parse(localStorage.getItem("task")) || []);
+    const [object, setObject] = useState({ task: '', status: 'todo' });
+
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formValidated()) {
+            const newTask = { ...object, id: Date.now() }; //helped from gpt
+            const updatedTasks = [...task, newTask];
+            setTask(updatedTasks);
+            localStorage.setItem("task", JSON.stringify(updatedTasks));
+            console.log(updatedTasks);
+            navigate('/Task')
+        }
+    };
+
+    const formValidated = () => {
+        const { task } = object;
+
+        if (!task) {
+            alert("Please fill all the fields");
+            return false;
+        }
+        return true;
+    };
+
+    const handleChange = (e) => {
+        setObject({ ...object, [e.target.name]: e.target.value });
+    };
 
     const cancel = (e) => {
         navigate("/Task");
