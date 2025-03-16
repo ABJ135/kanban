@@ -4,6 +4,12 @@ import Navbar from '../components/Navbar';
 
 function AddTask() {
    
+
+    const cancel = (e) => {
+        navigate("/Task");
+        e.target.reset();
+    };
+
     return (
         <div>
             <div>
