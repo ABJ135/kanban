@@ -3,17 +3,21 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import Navbar from "../components/Navbar";
 
 const getStoredTasks = () => {
-  
-    const storedTasks = JSON.parse(localStorage.getItem("task"));
-    if (Array.isArray(storedTasks)) {
-      return {
-        todo: storedTasks.filter(task => task.status === "todo"),
-        "in-progress": storedTasks.filter(task => task.status === "in-progress"),
-        completed: storedTasks.filter(task => task.status === "completed"),
-      };
+    try {
+      const storedTasks = JSON.parse(localStorage.getItem("task"));
+      if (Array.isArray(storedTasks)) {
+        return {
+          todo: storedTasks.filter(task => task.status === "todo"),
+          "in-progress": storedTasks.filter(task => task.status === "in-progress"),
+          completed: storedTasks.filter(task => task.status === "completed"),
+        };
+      }
+    } catch (error) {
+      console.error("Error reading from localStorage:", error);
     }
+    return { todo: [], "in-progress": [], completed: [] };  // Fallback in case of error or empty localStorage
+  };
   
-};
 
 function Task() {
   const [tasks, setTasks] = useState(getStoredTasks());
@@ -47,7 +51,7 @@ function Task() {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100">
       <Navbar />
       <h1 className="text-2xl font-bold text-center mb-6">Kanban Board</h1>
 

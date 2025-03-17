@@ -10,8 +10,8 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Task />} />
-        <Route path = '/AddTask' element={<AddTask/> } />
-        <Route path = 'Task' element={<Task />}/>
+        <Route path='/AddTask' element={<AddTask />} />
+        <Route path='/Task' element={<Task />} />
       </Routes>
     </>
   )
