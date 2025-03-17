@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<AddTask />} />
+        <Route path='/' element={<Task />} />
         <Route path = '/AddTask' element={<AddTask/> } />
         <Route path = 'Task' element={<Task />}/>
       </Routes>
